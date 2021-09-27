@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.Arrays;
 
 import javafx.scene.paint.Color;
 
@@ -29,9 +28,7 @@ public class Board {
 			return false;
 		}else {
 			for(int i=this.board[C].length-1;i>=0;i--) {
-				System.out.println(i);
 				if(this.board[C][i].getState()==State.Neutral) {
-					System.out.println(this.board[C][i]);
 					if(color.equals(Color.RED)) {
 						this.board[C][i].setState(State.Red);
 						return true;

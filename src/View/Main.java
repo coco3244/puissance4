@@ -22,8 +22,9 @@ public class Main extends Application{
         }
 		loader.setLocation(fxmlFileUrl);
 		root = loader.load();
-		MainController MainControl = loader.getController();
+		MainController mainControl = loader.getController();
 		Scene scene = new Scene(root);
+		mainControl.setSceneListener(scene);
 		primaryStage.setTitle("Puissance 4");
 		primaryStage.setScene(scene);
 		primaryStage.show();

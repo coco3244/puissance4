@@ -1,20 +1,28 @@
 package Controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import Model.Board;
-import Model.Token;
 import Model.State;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 public class MainController implements Initializable{
 
@@ -23,6 +31,12 @@ public class MainController implements Initializable{
 
 	@FXML
 	Pane pane;
+
+	@FXML
+	Menu menu;
+
+	@FXML
+	MenuItem about,htp;
 
 	final int C =7;
 	final int L = 6;
@@ -39,15 +53,31 @@ public class MainController implements Initializable{
 		gc = canvas.getGraphicsContext2D();
 		turn=Color.RED;
 		board = new Board(C,L);
-		
+
 		pane.widthProperty().addListener(evt -> draw());
 		pane.heightProperty().addListener(evt -> draw());
 		pane.setStyle("-fx-background-color: blue");
 
 		gc.setFill(Color.WHITE);
-		canvas.setOnMouseClicked(e->{
 
+		about.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				launchNeWindow("/about.fxml","About");
+
+			}
 		});
+
+		htp.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				launchNeWindow("/howtoplay.fxml","How to play");
+
+			}
+		});
+
 
 		canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
 			final double MOUSEPOSITIONX = e.getX();
@@ -55,36 +85,28 @@ public class MainController implements Initializable{
 
 			if(MOUSEPOSITIONX>0 && MOUSEPOSITIONX<distanceWidth+padding) {
 				placeTokenOk =board.placeToken(0, turn);
-				System.out.println(placeTokenOk);
-				System.out.println("Colonne 1");
 			}
-			if(MOUSEPOSITIONX>distanceWidth+padding && MOUSEPOSITIONX<2*(distanceWidth+padding)) {
+			if(MOUSEPOSITIONX>distanceWidth+padding && MOUSEPOSITIONX<(2*distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(1, turn);
-				System.out.println("Colonne 2");
 			}
-			if(MOUSEPOSITIONX>2*(distanceWidth+padding) && MOUSEPOSITIONX<3*(distanceWidth+padding)) {
+			if(MOUSEPOSITIONX>2*(distanceWidth)+padding && MOUSEPOSITIONX<3*(distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(2, turn);
-				System.out.println("Colonne 3");
 			}
 
-			if(MOUSEPOSITIONX>3*(distanceWidth+padding) && MOUSEPOSITIONX<4*(distanceWidth+padding)) {
+			if(MOUSEPOSITIONX>3*(distanceWidth)+padding && MOUSEPOSITIONX<4*(distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(3, turn);
-				System.out.println("Colonne 4");
 			}
 
-			if(MOUSEPOSITIONX>4*(distanceWidth+padding) && MOUSEPOSITIONX<5*(distanceWidth+padding)) {
+			if(MOUSEPOSITIONX>4*(distanceWidth)+padding && MOUSEPOSITIONX<5*(distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(4, turn);
-				System.out.println("Colonne 5");
 			}
 
-			if(MOUSEPOSITIONX>5*(distanceWidth+padding) && MOUSEPOSITIONX<6*(distanceWidth+padding)) {
+			if(MOUSEPOSITIONX>5*(distanceWidth)+padding && MOUSEPOSITIONX<6*(distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(5, turn);
-				System.out.println("Colonne 6");
 			}
 
-			if(MOUSEPOSITIONX>6*(distanceWidth+padding) && MOUSEPOSITIONX<7*(distanceWidth+padding)) {
+			if(MOUSEPOSITIONX>6*(distanceWidth)+padding && MOUSEPOSITIONX<7*(distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(6, turn);
-				System.out.println("Colonne 7");
 			}
 
 			if(placeTokenOk) {
@@ -93,9 +115,9 @@ public class MainController implements Initializable{
 				}else if(turn.equals(Color.YELLOW)) {
 					turn=Color.RED;
 				}else {
-					
+
 				}
-				
+
 			}
 			//System.out.println(this.board);
 			this.draw();
@@ -104,6 +126,54 @@ public class MainController implements Initializable{
 
 
 
+	}
+
+	private void launchNeWindow(String path,String title) {
+		Stage stage = new Stage();
+		Parent root2=null;
+		FXMLLoader loader = new FXMLLoader();
+		URL fxmlFileUrl = getClass().getResource(path);
+		if (fxmlFileUrl == null) {
+			System.out.println("Impossible de charger le fichier fxml");
+			System.exit(-1);
+		}
+		loader.setLocation(fxmlFileUrl);
+		try {
+			root2 = loader.load();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			System.out.println(e1.getMessage());
+		}
+
+		Scene scene = new Scene(root2);
+
+		stage.setResizable(false);
+		stage.setScene(scene);
+		stage.setTitle(title);
+		stage.show();
+	}
+
+	public void setSceneListener(Scene scene) {
+		scene.setOnKeyPressed(e->{
+			switch (e.getCode()) {
+			case F5:
+				this.reset();
+				break;
+
+			default:
+				break;
+			}
+		});
+	}
+
+	private void reset() {
+		for(int i=0;i<C;i++) {
+			for(int j=0;j<L;j++) {
+				board.getBoard()[i][j].setState(State.Neutral);
+			}
+		}
+
+		this.draw();
 	}
 	private void draw() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
