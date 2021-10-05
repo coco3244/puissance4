@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="269.0" layoutY="14.0" text="Puissance 4" />
-      <Label layoutX="219.0" layoutY="200.0" text="Press F5 key to reset the game" />
+      <Label layoutX="160.0" layoutY="200.0" text="Press F5 key / reset button to reset the game" />
       <Label layoutX="169.0" layoutY="58.0" text="The first to align 4 token with the same color win" />
       <Label layoutX="73.0" layoutY="91.0" text="Even if someone won, the game still running, open your eyes if you don't want to lose" />
    </children>

@@ -24,7 +24,13 @@ public class Main extends Application{
 		root = loader.load();
 		MainController mainControl = loader.getController();
 		Scene scene = new Scene(root);
+		
 		mainControl.setSceneListener(scene);
+		primaryStage.sizeToScene();
+		primaryStage.setWidth(700);
+		primaryStage.setHeight(700);
+		primaryStage.setMinWidth(primaryStage.getWidth());
+	    primaryStage.setMinHeight(primaryStage.getHeight());
 		primaryStage.setTitle("Puissance 4");
 		primaryStage.setScene(scene);
 		primaryStage.show();

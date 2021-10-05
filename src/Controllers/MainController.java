@@ -16,10 +16,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -36,8 +38,13 @@ public class MainController implements Initializable{
 	Menu menu;
 
 	@FXML
+	Button resetButton;
+	
+	@FXML
 	MenuItem about,htp;
 
+	@FXML
+	VBox turnColorVbox;
 	final int C =7;
 	final int L = 6;
 
@@ -53,27 +60,28 @@ public class MainController implements Initializable{
 		gc = canvas.getGraphicsContext2D();
 		turn=Color.RED;
 		board = new Board(C,L);
-
+		
 		pane.widthProperty().addListener(evt -> draw());
 		pane.heightProperty().addListener(evt -> draw());
 		pane.setStyle("-fx-background-color: blue");
-
 		gc.setFill(Color.WHITE);
-
+		changeVboxTurnColor(turn);
 		about.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				launchNeWindow("/about.fxml","About");
+				launchNewWindow("/about.fxml","About");
 
 			}
 		});
-
+		resetButton.addEventFilter(MouseEvent.MOUSE_CLICKED, e->{
+			this.reset();
+		});
 		htp.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				launchNeWindow("/howtoplay.fxml","How to play");
+				launchNewWindow("/howtoplay.fxml","How to play");
 
 			}
 		});
@@ -110,13 +118,7 @@ public class MainController implements Initializable{
 			}
 
 			if(placeTokenOk) {
-				if(turn.equals(Color.RED)) {
-					turn=Color.YELLOW;
-				}else if(turn.equals(Color.YELLOW)) {
-					turn=Color.RED;
-				}else {
-
-				}
+				this.changeTurnColor(turn);
 
 			}
 			//System.out.println(this.board);
@@ -128,7 +130,26 @@ public class MainController implements Initializable{
 
 	}
 
-	private void launchNeWindow(String path,String title) {
+	private void changeTurnColor(Color color) {
+		if(color.equals(Color.RED)) {
+			turn=Color.YELLOW;			
+		}
+		if(color.equals(Color.YELLOW)) {
+			turn=Color.RED;			
+		}
+		changeVboxTurnColor(turn);
+	}
+	
+	private void changeVboxTurnColor(Color color) {
+		if(color.equals(Color.RED)) {		
+			turnColorVbox.setStyle("-fx-background-color:red;");
+		}
+		if(color.equals(Color.YELLOW)) {
+			turnColorVbox.setStyle("-fx-background-color:yellow;");
+		}
+	}
+	
+	private void launchNewWindow(String path,String title) {
 		Stage stage = new Stage();
 		Parent root2=null;
 		FXMLLoader loader = new FXMLLoader();
@@ -158,6 +179,7 @@ public class MainController implements Initializable{
 			switch (e.getCode()) {
 			case F5:
 				this.reset();
+				turn=Color.RED;
 				break;
 
 			default:
@@ -172,7 +194,7 @@ public class MainController implements Initializable{
 				board.getBoard()[i][j].setState(State.Neutral);
 			}
 		}
-
+		this.changeTurnColor(Color.YELLOW);
 		this.draw();
 	}
 	private void draw() {

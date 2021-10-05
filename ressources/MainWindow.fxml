@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -8,20 +12,27 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="700.0" minWidth="700.0" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
    <children>
       <HBox alignment="TOP_CENTER" fillHeight="false" prefHeight="30.0" prefWidth="700.0">
          <children>
-            <MenuBar HBox.hgrow="ALWAYS">
-              <menus>
-                <Menu fx:id="menu" mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem fx:id="about" mnemonicParsing="false" text="About" />
-                        <MenuItem fx:id="htp" mnemonicParsing="false" text="How to play" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
+            <AnchorPane HBox.hgrow="ALWAYS">
+               <children>
+                  <MenuBar prefHeight="29.0" prefWidth="405.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="295.0" HBox.hgrow="ALWAYS">
+                    <menus>
+                      <Menu fx:id="menu" mnemonicParsing="false" text="Help">
+                        <items>
+                          <MenuItem fx:id="about" mnemonicParsing="false" text="About" />
+                              <MenuItem fx:id="htp" mnemonicParsing="false" text="How to play" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+                  <VBox fx:id="turnColorVbox" layoutX="600.0" layoutY="-85.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label layoutX="500.0" layoutY="8.0" text="Jeton suivant:" />
+                  <Button fx:id="resetButton" layoutX="410.0" layoutY="3.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Reset" />
+               </children>
+            </AnchorPane>
          </children>
       </HBox>
       <Pane fx:id="pane" prefHeight="781.0" prefWidth="700.0" VBox.vgrow="ALWAYS">
