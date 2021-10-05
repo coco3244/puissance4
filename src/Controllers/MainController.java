@@ -93,28 +93,20 @@ public class MainController implements Initializable{
 
 			if(MOUSEPOSITIONX>0 && MOUSEPOSITIONX<distanceWidth+padding) {
 				placeTokenOk =board.placeToken(0, turn);
-			}
-			if(MOUSEPOSITIONX>distanceWidth+padding && MOUSEPOSITIONX<(2*distanceWidth)+padding) {
+			}else if(MOUSEPOSITIONX>distanceWidth+padding && MOUSEPOSITIONX<(2*distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(1, turn);
-			}
-			if(MOUSEPOSITIONX>2*(distanceWidth)+padding && MOUSEPOSITIONX<3*(distanceWidth)+padding) {
+			}else if(MOUSEPOSITIONX>2*(distanceWidth)+padding && MOUSEPOSITIONX<3*(distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(2, turn);
-			}
-
-			if(MOUSEPOSITIONX>3*(distanceWidth)+padding && MOUSEPOSITIONX<4*(distanceWidth)+padding) {
+			}else if(MOUSEPOSITIONX>3*(distanceWidth)+padding && MOUSEPOSITIONX<4*(distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(3, turn);
-			}
-
-			if(MOUSEPOSITIONX>4*(distanceWidth)+padding && MOUSEPOSITIONX<5*(distanceWidth)+padding) {
+			}else if(MOUSEPOSITIONX>4*(distanceWidth)+padding && MOUSEPOSITIONX<5*(distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(4, turn);
-			}
-
-			if(MOUSEPOSITIONX>5*(distanceWidth)+padding && MOUSEPOSITIONX<6*(distanceWidth)+padding) {
+			}else if(MOUSEPOSITIONX>5*(distanceWidth)+padding && MOUSEPOSITIONX<6*(distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(5, turn);
-			}
-
-			if(MOUSEPOSITIONX>6*(distanceWidth)+padding && MOUSEPOSITIONX<7*(distanceWidth)+padding) {
+			}else if(MOUSEPOSITIONX>6*(distanceWidth)+padding && MOUSEPOSITIONX<7*(distanceWidth)+padding) {
 				placeTokenOk =board.placeToken(6, turn);
+			}else {
+				placeTokenOk=false;
 			}
 
 			if(placeTokenOk) {
