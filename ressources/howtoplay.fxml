@@ -10,7 +10,7 @@
    <children>
       <Label layoutX="269.0" layoutY="14.0" text="Puissance 4" />
       <Label layoutX="160.0" layoutY="200.0" text="Press F5 key / reset button to reset the game" />
-      <Label layoutX="169.0" layoutY="58.0" text="The first to align 4 token with the same color win" />
-      <Label layoutX="73.0" layoutY="91.0" text="Even if someone won, the game still running, open your eyes if you don't want to lose" />
+      <Label layoutX="149.0" layoutY="57.0" text="The first to align 4 token with the same color win" />
+      <Label layoutX="28.0" layoutY="89.0" text="Even if someone won, the game still running, open your eyes if you don't want to lose" />
    </children>
 </AnchorPane>
